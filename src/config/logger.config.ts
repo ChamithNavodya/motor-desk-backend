@@ -3,6 +3,7 @@ import { Params } from 'nestjs-pino';
 
 export const getLoggerConfig = (configService: ConfigService): Params => {
   const isProduction = configService.get('NODE_ENV') === 'production';
+  const isVercel = configService.get('VERCEL') === '1' || !!process.env.VERCEL;
   const ignoredContexts = configService
     .get<string>('LOG_IGNORED_CONTEXTS', '')
     .split(',')
@@ -11,17 +12,18 @@ export const getLoggerConfig = (configService: ConfigService): Params => {
 
   return {
     pinoHttp: {
-      transport: isProduction
-        ? undefined
-        : {
-            target: 'pino-pretty',
-            options: {
-              colorize: true,
-              levelFirst: true,
-              ignore: 'hostname,context,reqId,responseTime',
-              messageFormat: '\x1b[36m[{context}]\x1b[0m {msg}',
+      transport:
+        isProduction || isVercel
+          ? undefined
+          : {
+              target: 'pino-pretty',
+              options: {
+                colorize: true,
+                levelFirst: true,
+                ignore: 'hostname,context,reqId,responseTime',
+                messageFormat: '\x1b[36m[{context}]\x1b[0m {msg}',
+              },
             },
-          },
       level: isProduction ? 'info' : 'debug',
       // Hooks for filtering out contexts
       hooks: {
