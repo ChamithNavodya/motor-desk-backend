@@ -1,20 +1,13 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from '../src/app.module';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { VercelRequest, VercelResponse } from '@vercel/node';
+import { loadApplication } from '../src/main';
 
-let cachedApp: any = null;
+let cachedServer: any;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (!cachedApp) {
-    cachedApp = await NestFactory.create(AppModule, { bodyParser: false });
-
-    cachedApp.enableCors({ origin: process.env.CORS_ORIGINS?.split(',') || ['*'], credentials: true });
-
-    await cachedApp.init();
+  if (!cachedServer) {
+    const { app } = await loadApplication();
+    cachedServer = app.getHttpAdapter().getInstance();
   }
 
-  const httpAdapter = cachedApp.getHttpAdapter();
-  const instance = httpAdapter.getInstance();
-
-  instance(req, res);
+  return cachedServer(req, res);
 }
