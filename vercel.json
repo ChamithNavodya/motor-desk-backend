@@ -8,10 +8,10 @@
   ],
   "installCommand": "npm install && npx prisma generate",
   "buildCommand": "npm run build",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "api/index.ts"
+      "src": "/(.*)",
+      "destination": "/api/index.ts"
     }
   ]
 }

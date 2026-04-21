@@ -27,9 +27,12 @@ export async function loadApplication() {
     .setDescription('The Motor Desk Multi-tenant API documentation')
     .setVersion('1.0')
     .addBearerAuth()
+    .addTag('Auth', 'Authentication endpoints')
+    .addTag('Tenants', 'Tenant management endpoints')
+    .addTag('Invitations', 'Invitation management endpoints')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+  SwaggerModule.setup('docs', app, document);
 
   app.useGlobalInterceptors(new ResponseInterceptor(app.get(Reflector)), app.get(LoggingInterceptor));
   app.useGlobalFilters(new GlobalExceptionFilter());

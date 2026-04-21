@@ -1,0 +1,551 @@
+{
+  "info": {
+    "_postman_id": "6b733ae6-d209-4ff1-bee3-ce0709149001",
+    "name": "Motor Desk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31795566"
+  },
+  "item": [
+    {
+      "name": "Super Admin",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/central/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "central",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"admin123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/central/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "central",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "436"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1b4-ZrRWwa91HBdjClxSm0oIogR4fxc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 05:06:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzM2M4MGVmZC0yYjRkLTRkZWMtOGNkMS0zYmFmN2E5MjNkNTAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzc2NzQ4MDAzLCJleHAiOjE3NzczNTI4MDN9.50KqipSMRv_buN6Q0FY0N0nEcvL7oD3HElS_NycUdVo\",\n        \"user\": {\n            \"id\": \"33c80efd-2b4d-4dec-8cd1-3baf7a923d50\",\n            \"email\": \"admin@gmail.com\",\n            \"role\": \"superadmin\",\n            \"tenantId\": null\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Onboard Tenant",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzM2M4MGVmZC0yYjRkLTRkZWMtOGNkMS0zYmFmN2E5MjNkNTAiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzc2NzQzNDk0LCJleHAiOjE3NzczNDgyOTR9.oYUvRE85UpLfpPeaT24U_OkegQHJe6XeKn7l-BnulFY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"ABC3 Motors\",\n    \"ownerEmail\": \"abc3@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/invitations/onboard",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "invitations",
+                "onboard"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"name\": \"ABC3 Motors\",\n    \"ownerEmail\": \"abc3@gmail.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/invitations/onboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "invitations",
+                    "onboard"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "364"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"16c-mpoKpEnnXsBQAc4QTOpMUuPZkEM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 05:15:44 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Tenant onboarding initiated\",\n    \"data\": {\n        \"tenant\": {\n            \"id\": \"439f2605-aef3-423b-bd69-079ca00c85ab\",\n            \"name\": \"ABC3 Motors\",\n            \"email\": \"abc3@gmail.com\",\n            \"schemaName\": \"abc3_motors\",\n            \"status\": \"active\",\n            \"createdAt\": \"2026-04-21T05:15:43.147Z\",\n            \"updatedAt\": \"2026-04-21T05:15:43.147Z\"\n        },\n        \"token\": \"45d659302fe6be9a7f785e36b4a77baf442d6a4710f47388943ff69a16ae98de\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Owner",
+      "item": [
+        {
+          "name": "Owner Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"token\": \"45d659302fe6be9a7f785e36b4a77baf442d6a4710f47388943ff69a16ae98de\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/invitations/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "invitations",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"token\": \"45d659302fe6be9a7f785e36b4a77baf442d6a4710f47388943ff69a16ae98de\",\n    \"password\": \"password123\",\n    \"confirmPassword\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/invitations/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "invitations",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "136"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"88-QQX/LysODoRS29x3aDML2B+ACBI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 05:22:59 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Onboarding completed successfully\",\n    \"data\": {\n        \"success\": true,\n        \"tenantId\": \"439f2605-aef3-423b-bd69-079ca00c85ab\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Owner Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"shalitha@gmail.com\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/owner/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "owner",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"shalitha@gmail.com\",\n    \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/owner/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "owner",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "466"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d2-RwkH/lVUhdTl1zCT7gwkZRHzBc4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 05:29:41 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkOTA1NjgxNC1lMGFkLTQ3OGYtYjkyNS0yNzAyMDRjY2MzZjUiLCJlbWFpbCI6InNoYWxpdGhhQGdtYWlsLmNvbSIsInJvbGUiOiJvd25lciIsImlhdCI6MTc3Njc0OTM4MSwiZXhwIjoxNzc3MzU0MTgxfQ.zc5zimEF6PaJim_TyCIZkYj839BhZzSCh6DLNHh_w6I\",\n        \"user\": {\n            \"id\": \"d9056814-e0ad-478f-b925-270204ccc3f5\",\n            \"email\": \"shalitha@gmail.com\",\n            \"role\": \"owner\",\n            \"tenantId\": \"b009c520-93ba-4ed3-a333-c526c8cd37cd\"\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Validate Owner Invitation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"token\": \"45d659302fe6be9a7f785e36b4a77baf442d6a4710f47388943ff69a16ae98de\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/invitations/validate-owner-invitation",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "invitations",
+                "validate-owner-invitation"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"token\": \"45d659302fe6be9a7f785e36b4a77baf442d6a4710f47388943ff69a16ae98de\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/invitations/validate-owner-invitation",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "invitations",
+                    "validate-owner-invitation"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "110"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"6e-Ae1ioD69YKZ0yd8vrCgZjhH3NcA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 21 Apr 2026 05:20:49 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Invitation validated\",\n    \"data\": {\n        \"email\": \"abc3@gmail.com\",\n        \"tenantName\": \"ABC3 Motors\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Health Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "status"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "base_url",
+      "value": "",
+      "disabled": true
+    }
+  ]
+}
