@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
-import { getLoggerConfig } from './config/logger.config';
-import { TenantModule } from './central/tenant.module';
-import { AuthModule } from './auth/auth.module';
-import { TenantController } from './central/controllers/tenant.controller';
+import { getLoggerConfig } from './config/logger.config.js';
+import { TenantManagementModule } from './modules/tenants/tenant-management.module.js';
+import { SuperadminModule } from './modules/superadmin/superadmin.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+import { LoggingInterceptor } from './interceptors/logging.interceptor.js';
 
 @Module({
   imports: [
@@ -16,10 +17,11 @@ import { TenantController } from './central/controllers/tenant.controller';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => getLoggerConfig(configService),
     }),
-    TenantModule,
+    TenantManagementModule,
+    SuperadminModule,
     AuthModule,
   ],
-  controllers: [AppController, TenantController],
-  providers: [AppService],
+  controllers: [AppController],
+  providers: [AppService, LoggingInterceptor],
 })
 export class AppModule {}

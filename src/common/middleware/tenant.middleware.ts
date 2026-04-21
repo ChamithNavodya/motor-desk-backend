@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { TenantService } from '../../central/services/tenant.service';
+import { TenantService } from '../../modules/tenants/services/tenant.service.js';
 
 export interface TenantRequest extends Request {
   tenantId?: string;

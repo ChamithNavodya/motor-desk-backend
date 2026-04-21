@@ -46,21 +46,27 @@ export class TenantService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  async createTenantWithSchema(name: string, ownerEmail: string) {
+  async initiateOnboarding(name: string, ownerEmail: string) {
     const schemaName = this.toSchemaName(name);
 
-    const existingTenant = await this.centralPrisma.tenant.findUnique({
-      where: { name },
-    });
-
+    // check if tenant name already exists
+    const existingTenant = await this.centralPrisma.tenant.findUnique({ where: { name } });
     if (existingTenant) throw new Error('Tenant with this name already exists');
+
+    // check if tenant schema already exists
+    const existingSchema = await this.centralPrisma.tenant.findUnique({ where: { schemaName } });
+    if (existingSchema) throw new Error('Tenant with this schema already exists');
+
+    // check if tenant email already exists
+    const existingEmail = await this.centralPrisma.tenant.findUnique({ where: { email: ownerEmail } });
+    if (existingEmail) throw new Error('Tenant with this email already exists');
 
     await this.createTenantSchema(schemaName);
 
     await this.createTenantTables(schemaName);
 
     const tenant = await this.centralPrisma.tenant.create({
-      data: { name, schemaName, status: 'active' },
+      data: { name, schemaName, status: 'active', email: ownerEmail },
     });
 
     await this.seedDefaultCategories(schemaName);
@@ -233,7 +239,7 @@ export class TenantService implements OnModuleInit, OnModuleDestroy {
     return invitation;
   }
 
-  async acceptInvitation(token: string, password: string) {
+  async completeOnboarding(token: string, password: string) {
     const invitation = await this.validateInvitation(token);
     const schemaName = invitation.tenant.schemaName;
 
@@ -263,7 +269,7 @@ export class TenantService implements OnModuleInit, OnModuleDestroy {
       if (existingUser) throw new ConflictException('User with this email already exists in this tenant');
 
       await (client as any).user.create({
-        data: { email: invitation.email, password: hashedPassword, role: Role.owner },
+        data: { email: invitation.email, password: hashedPassword, role: Role.owner, tenantId: invitation.tenantId },
       });
     } finally {
       await client.$disconnect();
@@ -276,7 +282,7 @@ export class TenantService implements OnModuleInit, OnModuleDestroy {
       data: { status: 'accepted' },
     });
 
-    return { success: true, tenantId: invitation.tenantId };
+    return { tenantId: invitation.tenantId, email: invitation.email };
   }
 
   private createTenantPrismaClient(schemaName: string): PrismaClient {

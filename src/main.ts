@@ -1,12 +1,14 @@
 import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppModule } from './app.module.js';
 import { Logger } from 'nestjs-pino';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ResponseInterceptor } from './interceptors/response.interceptor';
-import { GlobalExceptionFilter } from './filters/global-exception.filter';
-import { TenantMiddleware } from './common/middleware/tenant.middleware';
-import { TenantService } from './central/services/tenant.service';
+import { ResponseInterceptor } from './interceptors/response.interceptor.js';
+import { LoggingInterceptor } from './interceptors/logging.interceptor.js';
+import { GlobalExceptionFilter } from './filters/global-exception.filter.js';
+import { TenantMiddleware } from './common/middleware/tenant.middleware.js';
+import { TenantService } from './modules/tenants/services/tenant.service.js';
 
 export async function loadApplication() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -20,7 +22,16 @@ export async function loadApplication() {
 
   app.setGlobalPrefix('api/v1');
 
-  app.useGlobalInterceptors(new ResponseInterceptor(app.get(Reflector)));
+  const config = new DocumentBuilder()
+    .setTitle('Motor Desk API')
+    .setDescription('The Motor Desk Multi-tenant API documentation')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
+
+  app.useGlobalInterceptors(new ResponseInterceptor(app.get(Reflector)), app.get(LoggingInterceptor));
   app.useGlobalFilters(new GlobalExceptionFilter());
 
   const tenantService = app.get(TenantService);

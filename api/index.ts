@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
-import { loadApplication } from '../src/main';
+import { loadApplication } from '../src/main.js';
 
 let cachedServer: any;
 
